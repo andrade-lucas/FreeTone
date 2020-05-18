@@ -1,4 +1,5 @@
 ﻿using FluentValidator.Validation;
+using Tone.Domain.Utils;
 using Tone.Shared.ValueObject;
 
 namespace Tone.Domain.ValueObjects
@@ -13,10 +14,13 @@ namespace Tone.Domain.ValueObjects
             FirstName = firstName;
             LastName = lastName;
 
+            if (FirstName == null)
+                FirstName = string.Empty;
+
             AddNotifications(new ValidationContract()
                 .Requires()
-                .HasMinLen(FirstName, 2, "FirstName", "O campo deve ter pelo menos 2 caracteres")
-                .HasMaxLen(FirstName, 40, "FirstName", "O campo deve ter no máximo 40 caracteres")
+                .HasMinLen(FirstName, 2, "FirstName", string.Format(MessagesUtil.MinLength, "Nome", "2"))
+                .HasMaxLen(FirstName, 40, "FirstName", string.Format(MessagesUtil.MaxLength, "Nome", 40))
             );
         }
     }

@@ -1,4 +1,5 @@
-﻿using FluentValidator;
+﻿using System.Text.RegularExpressions;
+using FluentValidator;
 using Tone.Domain.Utils;
 using Tone.Shared.ValueObject;
 
@@ -12,10 +13,16 @@ namespace Tone.Domain.ValueObjects
         {
             Address = address;
 
-            var addr = new System.Net.Mail.MailAddress(address);
-
-            if (addr.Address != address)
+            if (!IsEmail())
                 AddNotification(new Notification("Email", string.Format(MessagesUtil.InvalidField, "Email")));
+        }
+
+        private bool IsEmail()
+        {
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(Address);
+
+            return match.Success;
         }
     }
 }
