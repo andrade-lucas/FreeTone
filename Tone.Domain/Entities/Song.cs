@@ -6,8 +6,28 @@ namespace Tone.Domain.Entities
     public class Song : Entity
     {
         public string Title { get; private set; }
-        public string Lyrics { get; private set; }
-        public DateTime PublishedDate { get; private set; }
-        public string Singer { get; private set; }
+        public Singer Singer { get; private set; }
+        public string Url { get; private set; }
+        public DateTime? PublishedDate { get; private set; }
+        public DateTime UpdatedAt { get; private set; }
+
+        public Song(string title, Singer singer, string url, DateTime? publishedDate)
+        {
+            Title = title;
+            Singer = singer;
+            Url = url;
+            PublishedDate = publishedDate;
+            UpdatedAt = DateTime.Now;
+        }
+
+        public bool Upload(string file)
+        {
+            return false;
+        }
+
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 }

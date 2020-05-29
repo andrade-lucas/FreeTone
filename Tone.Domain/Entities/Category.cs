@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Tone.Shared.Entities;
+﻿using Tone.Shared.Entities;
 
 namespace Tone.Domain.Entities
 {

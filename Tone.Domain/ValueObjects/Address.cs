@@ -22,5 +22,10 @@ namespace Tone.Domain.ValueObjects
             Country = country;
             ZipCode = zipCode;
         }
+
+        public override string ToString()
+        {
+            return $"{Street} N° {Number}, {City}/{State}, {Country}";
+        }
     }
 }

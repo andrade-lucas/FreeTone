@@ -23,5 +23,10 @@ namespace Tone.Domain.ValueObjects
                 .HasMaxLen(FirstName, 40, "FirstName", string.Format(MessagesUtil.MaxLength, "Nome", 40))
             );
         }
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 }
