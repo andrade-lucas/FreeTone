@@ -8,5 +8,8 @@
         public static string InvalidField = "O campo {0} está inválido";
         public static string DocumentNumberInvalid = "Número de documento inválido";
         public static string RequiredField = "O campo {0} é obrigatório";
+
+        // Upload messages.
+        public static string InvalidFileType = "Tipo de arquivo inválido";
     }
 }

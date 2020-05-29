@@ -44,6 +44,7 @@ namespace Tone.Domain.Entities
 
         public bool UploadImage(string file)
         {
+            // TODO: Upload image to Azure.
             return false;
         }
 
