@@ -8,7 +8,7 @@ namespace Tone.Domain.Commands.Outputs
         public string Message { get; set; }
         public object Data { get; set; }
 
-        public CommandResult(bool status, string message, object data)
+        public CommandResult(bool status, string message, object data = null)
         {
             Status = status;
             Message = message;

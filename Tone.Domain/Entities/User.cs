@@ -9,7 +9,7 @@ namespace Tone.Domain.Entities
     {
         public Name Name { get; private set; }
         public Email Email { get; private set; }
-        public string Password { get; private set; }
+        public Password Password { get; private set; }
         public EUserStatus Status { get; private set; }
         public DateTime Birthday { get; private set; }
         public Address Address { get; private set; }
@@ -17,7 +17,7 @@ namespace Tone.Domain.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
-        public User(Name name, Email email, string password, DateTime birthday, Address address, string image)
+        public User(Name name, Email email, Password password, DateTime birthday, Address address, string image)
         {
             Name = name;
             Email = email;
@@ -30,7 +30,7 @@ namespace Tone.Domain.Entities
             UpdatedAt = DateTime.Now;
         }
 
-        public User(Name name, Email email, string password, EUserStatus status, DateTime birthday, Address address, string image)
+        public User(Name name, Email email, Password password, EUserStatus status, DateTime birthday, Address address, string image)
         {
             Name = name;
             Email = email;

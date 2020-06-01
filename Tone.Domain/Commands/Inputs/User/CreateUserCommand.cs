@@ -2,7 +2,7 @@ using System;
 using Tone.Domain.Enums;
 using Tone.Shared.Commands;
 
-namespace Tone.Domain.Commands.Inputs
+namespace Tone.Domain.Commands.Inputs.User
 {
     public class CreateUserCommand : ICommand
     {

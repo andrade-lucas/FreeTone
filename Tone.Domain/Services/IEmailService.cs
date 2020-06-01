@@ -4,6 +4,6 @@ namespace Tone.Domain.Services
 {
     public interface IEmailService
     {
-        void Send(string to, string subject, string body, IList<string> appends);
+        void Send(string to, string subject, string body, IList<string> appends = null);
     }
 }

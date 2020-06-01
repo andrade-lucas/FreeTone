@@ -1,5 +1,6 @@
 using FluentValidator;
-using Tone.Domain.Commands.Inputs;
+using Tone.Domain.Commands.Inputs.User;
+using Tone.Domain.Commands.Outputs;
 using Tone.Domain.Entities;
 using Tone.Domain.Repositories;
 using Tone.Domain.Services;
@@ -23,11 +24,24 @@ namespace Tone.Domain.Commands.Handlers
         {
             var name = new Name(command.FirstName, command.LastName);
             var email = new Email(command.Email);
+            var password = new Password(command.Password);
             var address = new Address(command.Street, command.Number, command.Neighborhood, command.City, command.State, command.Country, command.ZipCode);
+            var user = new User(name, email, password, command.Birthday, address, command.Image);
 
-            var user = new User(name, email, command.Password, command.Birthday, address, command.Image);
+            AddNotifications(name.Notifications);
+            AddNotifications(email.Notifications);
+            AddNotifications(password.Notifications);
+            AddNotifications(address.Notifications);
+            AddNotifications(user.Notifications);
 
-            throw new System.NotImplementedException();
+            bool save = _repository.Create(user);
+            if (save)
+                _emailService.Send(user.Email.Address, "Seja bem-vindo", "Seja bem-vindo ao FreeTone, seu cadastro foi realizado com sucesso!");
+
+            if (!save)
+                return new CommandResult(false, "Erro ao realizar cadastro", Notifications);
+
+            return new CommandResult(true, "Cadastro realizado com sucesso!");
         }
     }
 }
