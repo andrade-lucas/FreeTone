@@ -1,9 +1,11 @@
+using System;
 using Tone.Shared.Commands;
 
-namespace Tone.Domain.Commands.Inputs.Singer
+namespace Tone.Domain.Commands.Inputs.Singers
 {
-    public class CreateSingerCommand : ICommand
+    public class UpdateSingerCommand : ICommand
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Nationality { get; set; }

@@ -30,7 +30,8 @@ namespace Tone.Domain.Entities
             UpdatedAt = DateTime.Now;
         }
 
-        public User(Name name, Email email, Password password, EUserStatus status, DateTime birthday, Address address, string image)
+        public User(Guid id, Name name, Email email, Password password, EUserStatus status, DateTime birthday, Address address, string image)
+        : base(id)
         {
             Name = name;
             Email = email;

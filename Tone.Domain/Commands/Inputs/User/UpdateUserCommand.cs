@@ -4,8 +4,9 @@ using Tone.Shared.Commands;
 
 namespace Tone.Domain.Commands.Inputs.User
 {
-    public class CreateUserCommand : ICommand
+    public class UpdateUserCommand : ICommand
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

@@ -1,7 +1,7 @@
 using System;
 using Tone.Domain.Enums;
 
-namespace Tone.Domain.Queries.User
+namespace Tone.Domain.Queries.Users
 {
     public class GetUsersQuery
     {

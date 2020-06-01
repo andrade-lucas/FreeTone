@@ -1,7 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
+  <ItemGroup>
+    <ProjectReference Include="..\Tone.Domain\Tone.Domain.csproj"/>
+    <ProjectReference Include="..\Tone.Shared\Tone.Shared.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidator" Version="2.0.2"/>
+  </ItemGroup>
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
 </Project>
