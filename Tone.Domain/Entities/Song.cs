@@ -8,6 +8,7 @@ namespace Tone.Domain.Entities
         public string Title { get; private set; }
         public Singer Singer { get; private set; }
         public string Url { get; private set; }
+        public int DownloadCounter { get; set; }
         public DateTime? PublishedDate { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
@@ -20,9 +21,14 @@ namespace Tone.Domain.Entities
             UpdatedAt = DateTime.Now;
         }
 
-        public bool Upload(string file)
+        public bool Upload(string url)
         {
             return false;
+        }
+
+        public void Download()
+        {
+            DownloadCounter++;
         }
 
         public override string ToString()

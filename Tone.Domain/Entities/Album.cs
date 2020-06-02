@@ -15,6 +15,7 @@ namespace Tone.Domain.Entities
         public string Image { get; private set; }
         public IEnumerable<Song> Songs => this._songs.ToList();
         public DateTime UpdatedAt { get; private set; }
+        public DateTime CreatedAt { get; private set; }
 
         public Album(string title, Gender gender, Category category, string image)
         {
@@ -23,6 +24,15 @@ namespace Tone.Domain.Entities
             Category = category;
             Image = image;
             _songs = new List<Song>();
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
+        }
+
+        public Album(Guid id, Gender gender, Category category, string image) : base(id)
+        {
+            Gender = gender;
+            Category = category;
+            Image = image;
             UpdatedAt = DateTime.Now;
         }
 
