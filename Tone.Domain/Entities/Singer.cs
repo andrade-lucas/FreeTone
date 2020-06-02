@@ -1,8 +1,9 @@
-using System.Collections.Generic;
+using System;
 using System.Linq;
+using Tone.Domain.Utils;
 using Tone.Shared.Entities;
 using Tone.Domain.ValueObjects;
-using Tone.Domain.Utils;
+using System.Collections.Generic;
 
 namespace Tone.Domain.Entities
 {
@@ -17,6 +18,8 @@ namespace Tone.Domain.Entities
         public string Image { get; private set; }
         public IEnumerable<Song> Songs => this._songs.ToList();
         public IEnumerable<Album> Albums => this._albums.ToList();
+        public DateTime CreatedAt { get; private set; }
+        public DateTime UpdatedAt { get; private set; }
 
         public Singer(Name name, string nationality, string about, string image)
         {
@@ -26,6 +29,8 @@ namespace Tone.Domain.Entities
             Image = image;
             _songs = new List<Song>();
             _albums = new List<Album>();
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
         }
 
         public void AddSong(Song song)

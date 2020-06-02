@@ -12,7 +12,7 @@ namespace Tone.Domain.Commands.Inputs.User
         public string Email { get; set; }
         public string Password { get; set; }
         public EUserStatus Status { get; set; }
-        public DateTime Birthday { get; set; }
+        public DateTime Birthdate { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
         public string Neighborhood { get; set; }

@@ -27,7 +27,7 @@ namespace Tone.Domain.Commands.Handlers
             var email = new Email(command.Email);
             var password = new Password(command.Password);
             var address = new Address(command.Street, command.Number, command.Neighborhood, command.City, command.State, command.Country, command.ZipCode);
-            var user = new User(name, email, password, command.Birthday, address, command.Image);
+            var user = new User(name, email, password, command.Birthdate, address, command.Image);
 
             AddNotifications(name.Notifications);
             AddNotifications(email.Notifications);
@@ -51,7 +51,7 @@ namespace Tone.Domain.Commands.Handlers
             var email = new Email(command.Email);
             var password = new Password(command.Password);
             var address = new Address(command.Street, command.Number, command.Neighborhood, command.City, command.State, command.Country, command.ZipCode);
-            var user = new User(command.Id, name, email, password, command.Status, command.Birthday, address, command.Image);
+            var user = new User(command.Id, name, email, password, command.Status, command.Birthdate, address, command.Image);
 
             AddNotifications(name.Notifications);
             AddNotifications(email.Notifications);
