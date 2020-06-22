@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tone.Domain.Commands.Handlers;
 using Tone.Domain.Commands.Inputs.singers;
 using Tone.Domain.Commands.Inputs.Singers;
+using Tone.Domain.Entities;
 using Tone.Domain.Queries.Singers;
 using Tone.Domain.Repositories;
 using Tone.Shared.Commands;
@@ -29,7 +30,7 @@ namespace Tone.Api.Controllers
 
         [HttpGet]
         [Route("singers/{id}")]
-        public GetSingerByIdQuery GetById(Guid id)
+        public Singer GetById(Guid id)
         {
             return _repository.GetById(id);
         }

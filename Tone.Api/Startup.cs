@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Tone.Domain.Repositories;
+using Tone.Infra.Context;
+using Tone.Infra.Repositories;
 
 namespace Tone.Api
 {
@@ -16,6 +19,13 @@ namespace Tone.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IDB, MsSqlDB>();
+            services.AddTransient<IAlbumRepository, AlbumRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IGenderRepository, GenderRepository>();
+            services.AddTransient<ISingerRepository, SingerRepository>();
+            services.AddTransient<ISongRepository, SongRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
