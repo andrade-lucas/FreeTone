@@ -15,6 +15,13 @@ namespace Tone.Domain.Commands.Handlers
         private readonly IAlbumRepository _albumRepository;
         private readonly ISingerRepository _singerRepository;
 
+        public SongHandler(ISongRepository repository, IAlbumRepository albumRepository, ISingerRepository singerRepository)
+        {
+            _repository = repository;
+            _albumRepository = albumRepository;
+            _singerRepository = singerRepository;
+        }
+
         public ICommandResult Handle(CreateSongCommand command)
         {
             Singer singer = _singerRepository.GetById(command.SingerId);
