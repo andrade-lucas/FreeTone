@@ -7,7 +7,7 @@ namespace Tone.Domain.Repositories
     public interface ISingerRepository
     {
         GetSingersQuery Get(string search);
-        GetSingerByIdQuery GetById(Guid id);
+        Singer GetById(Guid id);
         bool Create(Singer singer);
         bool Update(Singer singer);
         bool Delete(Guid id);

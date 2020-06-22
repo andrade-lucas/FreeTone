@@ -14,10 +14,22 @@ namespace Tone.Domain.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
-        public Song(string title, Singer singer, string url, DateTime? publishedDate)
+        public Song(string title, Singer singer, Album album, string url, DateTime? publishedDate)
         {
             Title = title;
             Singer = singer;
+            Album = album;
+            Url = url;
+            PublishedDate = publishedDate;
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
+        }
+
+        public Song(Guid id, string title, Singer singer, Album album, string url, DateTime? publishedDate) : base(id)
+        {
+            Title = title;
+            Singer = singer;
+            Album = album;
             Url = url;
             PublishedDate = publishedDate;
             CreatedAt = DateTime.Now;
