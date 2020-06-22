@@ -80,9 +80,6 @@ namespace Tone.Domain.Entities
                 this.Status = status;
         }
 
-        public override string ToString()
-        {
-            return Name.ToString();
-        }
+        public override string ToString() => Name.ToString();
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using FluentValidator.Validation;
+using Tone.Domain.Utils;
 using Tone.Shared.Entities;
 
 namespace Tone.Domain.Entities
@@ -16,6 +18,11 @@ namespace Tone.Domain.Entities
             Description = description;
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
+
+            AddNotifications(new ValidationContract()
+                .Requires()
+                .HasMinLen(Title, 2, "Title", string.Format(MessagesUtil.MinLength, "Título", 2))
+            );
         }
 
         public Gender(Guid id, string title, string description) : base(id)
@@ -25,5 +32,7 @@ namespace Tone.Domain.Entities
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
         }
+
+        public override string ToString() => this.Title;
     }
 }
