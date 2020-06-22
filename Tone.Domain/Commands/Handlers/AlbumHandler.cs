@@ -1,7 +1,9 @@
 using FluentValidator;
 using Tone.Domain.Commands.Inputs.Albums;
+using Tone.Domain.Commands.Outputs;
 using Tone.Domain.Entities;
 using Tone.Domain.Repositories;
+using Tone.Domain.Utils;
 using Tone.Shared.Commands;
 
 namespace Tone.Domain.Commands.Handlers
@@ -24,18 +26,52 @@ namespace Tone.Domain.Commands.Handlers
         {
             Gender gender = _genderRepository.GetById(command.GenderId);
             Category category = _categoryRepository.GetById(command.CategoryId);
-            
-            throw new System.NotImplementedException();
+            Album album = new Album(command.Title, gender, category, command.Image);
+
+            AddNotifications(album.Notifications);
+
+            if (Invalid)
+                return new CommandResult(false, MessagesUtil.FormFail, Notifications);
+
+            bool result = _repository.Create(album);
+            if (!result)
+                return new CommandResult(false, MessagesUtil.CreateError, Notifications);
+
+            return new CommandResult(true, MessagesUtil.CreatedSuccess);
         }
 
         public ICommandResult Handle(EditAlbumCommand command)
         {
-            throw new System.NotImplementedException();
+            Gender gender = _genderRepository.GetById(command.GenderId);
+            Category category = _categoryRepository.GetById(command.CategoryId);
+            Album album = new Album(command.Id, command.Title, gender, category, command.Image);
+
+            AddNotifications(album.Notifications);
+
+            if (Invalid)
+                return new CommandResult(false, MessagesUtil.FormFail, Notifications);
+
+            bool result = _repository.Update(album);
+            if (!result)
+                return new CommandResult(false, MessagesUtil.UpdateError, Notifications);
+
+            return new CommandResult(true, MessagesUtil.CreatedSuccess);
         }
 
         public ICommandResult Handle(DeleteAlbumCommand command)
         {
-            throw new System.NotImplementedException();
+
+            if (command.Id.ToString().Length == 0)
+                AddNotification("Id", "Identificador inválido!");
+
+            if (Invalid)
+                return new CommandResult(false, string.Format(MessagesUtil.InvalidField, "Identificador"), Notifications);
+
+            bool result = _repository.Delete(command.Id);
+            if (!result)
+                return new CommandResult(false, MessagesUtil.DeleteError, Notifications);
+
+            return new CommandResult(false, MessagesUtil.DeletedSuccess);
         }
     }
 }

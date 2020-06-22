@@ -28,8 +28,9 @@ namespace Tone.Domain.Entities
             UpdatedAt = DateTime.Now;
         }
 
-        public Album(Guid id, Gender gender, Category category, string image) : base(id)
+        public Album(Guid id, string title, Gender gender, Category category, string image) : base(id)
         {
+            Title = title;
             Gender = gender;
             Category = category;
             Image = image;

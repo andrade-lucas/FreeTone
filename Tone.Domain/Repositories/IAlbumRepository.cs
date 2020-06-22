@@ -9,7 +9,7 @@ namespace Tone.Domain.Repositories
         IList<Album> Get(string search = "");
         Album GetById(Guid id);
         bool Create(Album album);
-        bool Edit(Album album);
+        bool Update(Album album);
         bool Delete(Guid id);
     }
 }

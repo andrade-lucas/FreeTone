@@ -5,6 +5,7 @@ namespace Tone.Domain.Commands.Inputs.Albums
 {
     public class EditAlbumCommand : ICommand
     {
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public Guid GenderId { get; set; }
         public Guid CategoryId { get; set; }
