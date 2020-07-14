@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tone.Domain.Commands.Handlers;
 using Tone.Domain.Commands.Inputs.Categories;
 using Tone.Domain.Entities;
+using Tone.Domain.Queries.Categories;
 using Tone.Domain.Repositories;
 using Tone.Shared.Commands;
 
@@ -22,14 +23,14 @@ namespace Tone.Api.Controllers
 
         [HttpGet]
         [Route("v1/categories")]
-        public IList<Category> Get()
+        public IList<GetCategoriesQuery> Get()
         {
             return _repository.Get();
         }
 
         [HttpGet]
         [Route("v1/categories/{id}")]
-        public Category GetById(Guid id)
+        public GetCategoryByIdQuery GetById(Guid id)
         {
             return _repository.GetById(id);
         }
@@ -42,14 +43,14 @@ namespace Tone.Api.Controllers
         }
 
         [HttpPut]
-        [Route("v1/categories")]
+        [Route("v1/categories/{id}")]
         public ICommandResult Update([FromBody]UpdateCategoryCommand command)
         {
             return _handler.Handle(command);
         }
 
         [HttpDelete]
-        [Route("v1/categories")]
+        [Route("v1/categories/{id}")]
         public ICommandResult Delete(DeleteCategoryCommand command)
         {
             return _handler.Handle(command);

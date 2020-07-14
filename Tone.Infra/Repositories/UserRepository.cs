@@ -14,7 +14,7 @@ namespace Tone.Infra.Repositories
 
         public UserRepository(IDB db)
         {
-            _db = db;
+            this._db = db;
         }
 
         public bool ChangeStatus(Guid id, int status)
@@ -76,12 +76,12 @@ namespace Tone.Infra.Repositories
             return affectedRows > 0;
         }
 
-        public bool Edit(User user)
+        public bool Update(User user)
         {
             int affectedRows = _db.Connection().Execute(
                 "update [User] set FirstName = @firstName, LastName = @lastName, Birthdate = @birthdate, Street = @street, " +
                 "Number = @number, Neighborhood = @neighborhood, City = @city, State = @state, Country = @country, " +
-                "ZipCode = @zipCode, Image = @image where Id = @id",
+                "ZipCode = @zipCode, Image = @image, UpdatedAt = @updatedAt where Id = @id",
                 new
                 {
                     id = user.Id,
@@ -95,7 +95,8 @@ namespace Tone.Infra.Repositories
                     state = user.Address.State,
                     country = user.Address.Country,
                     zipCode = user.Address.ZipCode,
-                    image = user.Image
+                    image = user.Image,
+                    updatedAt = user.UpdatedAt
                 }
             );
 

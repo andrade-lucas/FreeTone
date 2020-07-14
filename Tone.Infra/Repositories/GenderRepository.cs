@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Tone.Domain.Entities;
+using Tone.Domain.Queries.Genders;
 using Tone.Domain.Repositories;
 
 namespace Tone.Infra.Repositories
@@ -27,7 +28,7 @@ namespace Tone.Infra.Repositories
             throw new NotImplementedException();
         }
 
-        public IList<Gender> GetList(string search)
+        public IList<GetGendersQuery> Get()
         {
             throw new NotImplementedException();
         }

@@ -8,7 +8,7 @@ namespace Tone.Domain.Repositories
     {
         bool Create(User user);
         
-        bool Edit(User user);
+        bool Update(User user);
         
         bool ChangeStatus(Guid id, int status);
 

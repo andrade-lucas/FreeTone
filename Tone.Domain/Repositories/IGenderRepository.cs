@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Tone.Domain.Entities;
+using Tone.Domain.Queries.Genders;
 
 namespace Tone.Domain.Repositories
 {
     public interface IGenderRepository
     {
-        IList<Gender> GetList(string search);
+        IList<GetGendersQuery> Get();
         Gender GetById(Guid id);
         bool Create(Gender gender);
         bool Edit(Gender gender);

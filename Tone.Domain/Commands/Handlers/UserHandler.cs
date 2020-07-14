@@ -59,7 +59,7 @@ namespace Tone.Domain.Commands.Handlers
             if (Invalid)
                 return new CommandResult(false, "Falha ao atualizar usuário", Notifications);
             
-            var result = _repository.Edit(user);
+            var result = _repository.Update(user);
 
             if (!result)
                 return new CommandResult(false, "Falha ao atualizar usuário");

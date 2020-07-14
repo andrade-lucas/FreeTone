@@ -1,4 +1,5 @@
 ﻿using System;
+using Tone.Domain.Utils;
 using Tone.Shared.Entities;
 
 namespace Tone.Domain.Entities
@@ -16,18 +17,28 @@ namespace Tone.Domain.Entities
             Description = description;
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
+
+            Validate();
         }
 
-        public Category(Guid id, string title, string description)
+        public Category(Guid id, string title, string description) : base(id)
         {
             Title = title;
             Description = description;
-            UpdatedAt = UpdatedAt;
+            UpdatedAt = DateTime.Now;
+
+            Validate();
         }
 
         public override string ToString()
         {
             return Title;
+        }
+
+        private void Validate()
+        {
+            if (Title.Length < 3)
+                AddNotification("Title", string.Format(MessagesUtil.MinLength, "Título", 3));
         }
     }
 }
