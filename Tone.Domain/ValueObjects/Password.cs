@@ -1,4 +1,3 @@
-using System;
 using System.Text;
 using Tone.Shared.ValueObject;
 using System.Security.Cryptography;
@@ -20,8 +19,8 @@ namespace Tone.Domain.ValueObjects
 
         private string Cryptograph(string value)
         {
-            var crypt = new System.Security.Cryptography.SHA256Managed();
-            var hash = new System.Text.StringBuilder();
+            var crypt = new SHA256Managed();
+            var hash = new StringBuilder();
             byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(value));
             foreach (byte theByte in crypto)
             {

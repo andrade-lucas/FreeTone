@@ -8,7 +8,7 @@ namespace Tone.Domain.Entities
         public string Title { get; private set; }
         public string Description { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; private set; }
 
         public Category(string title, string description)
         {

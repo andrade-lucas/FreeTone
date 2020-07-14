@@ -3,6 +3,8 @@ using Tone.Domain.Entities;
 using Tone.Domain.Repositories;
 using Tone.Infra.Context;
 using Dapper;
+using System.Linq;
+using Tone.Domain.Queries.Users;
 
 namespace Tone.Infra.Repositories
 {
@@ -17,27 +19,99 @@ namespace Tone.Infra.Repositories
 
         public bool ChangeStatus(Guid id, int status)
         {
-            throw new NotImplementedException();
+            int affectedRows = _db.Connection().Execute(
+                "update [User] set Status = @status where Id = @id",
+                new
+                {
+                    id = id,
+                    status = status
+                }
+            );
+
+            return affectedRows > 0;
         }
 
         public bool Create(User user)
         {
-            throw new NotImplementedException();
+            int result = _db.Connection().Execute(
+                "insert into [User] (Id, FirstName, LastName, Email, Password, Status, Birthdate, Street, Number, " +
+                "Neighborhood, City, State, Country, ZipCode, Image, CreatedAt, UpdatedAt) values (@id, @firstName, @lastName, " +
+                "@email, @password, @status, @birthdate, @street, @number, @neighborhood, @city, @state, @country, " +
+                "@zipCode, @image, @createdAt, @updatedAt)",
+                new
+                {
+                    id = user.Id,
+                    firstName = user.Name.FirstName,
+                    lastName = user.Name.LastName,
+                    email = user.Email.Address,
+                    password = user.Password.Value,
+                    status = user.Status,
+                    birthdate = user.Birthdate,
+                    street = user.Address.Street,
+                    number = user.Address.Number,
+                    neighborhood = user.Address.Neighborhood,
+                    city = user.Address.City,
+                    state = user.Address.State,
+                    country = user.Address.Country,
+                    zipCode = user.Address.ZipCode,
+                    image = user.Image,
+                    createdAt = user.CreatedAt,
+                    updatedAt = user.UpdatedAt
+                }
+            );
+
+            return result > 0;
         }
 
         public bool Delete(Guid id)
         {
-            throw new NotImplementedException();
+            int affectedRows = _db.Connection().Execute(
+                "delete from [User] where Id = @id",
+                new
+                {
+                    id = id
+                }
+            );
+
+            return affectedRows > 0;
         }
 
         public bool Edit(User user)
         {
-            throw new NotImplementedException();
+            int affectedRows = _db.Connection().Execute(
+                "update [User] set FirstName = @firstName, LastName = @lastName, Birthdate = @birthdate, Street = @street, " +
+                "Number = @number, Neighborhood = @neighborhood, City = @city, State = @state, Country = @country, " +
+                "ZipCode = @zipCode, Image = @image where Id = @id",
+                new
+                {
+                    id = user.Id,
+                    firstName = user.Name.FirstName,
+                    lastName = user.Name.LastName,
+                    birthdate = user.Birthdate,
+                    street = user.Address.Street,
+                    number = user.Address.Number,
+                    neighborhood = user.Address.Neighborhood,
+                    city = user.Address.City,
+                    state = user.Address.State,
+                    country = user.Address.Country,
+                    zipCode = user.Address.ZipCode,
+                    image = user.Image
+                }
+            );
+
+            return affectedRows > 0;
         }
 
-        public User Login(string email, string password)
+        public UserAuthQuery Login(string email, string password)
         {
-            throw new NotImplementedException();
+            return _db.Connection().Query<UserAuthQuery>(
+                "select Id, FirstName, LastName, Email from [User] where Email = @email and Password = @password",
+                new
+                {
+                    email = email,
+                    password = password
+                }
+            ).FirstOrDefault();
         }
     }
 }

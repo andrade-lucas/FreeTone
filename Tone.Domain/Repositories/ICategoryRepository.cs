@@ -6,7 +6,7 @@ namespace Tone.Domain.Repositories
 {
     public interface ICategoryRepository
     {
-        IList<Category> Get(string search);
+        IList<Category> Get();
         Category GetById(Guid id);
         bool Create(Category category);
         bool Update(Category category);

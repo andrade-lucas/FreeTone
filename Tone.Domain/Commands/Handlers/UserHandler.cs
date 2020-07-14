@@ -1,3 +1,4 @@
+using System;
 using FluentValidator;
 using Tone.Domain.Commands.Inputs.User;
 using Tone.Domain.Commands.Outputs;
@@ -15,7 +16,7 @@ namespace Tone.Domain.Commands.Handlers
         private readonly IUserRepository _repository;
         private readonly IEmailService _emailService;
 
-        public UserHandler(IUserRepository repository, IEmailService emailService = null)
+        public UserHandler(IUserRepository repository, IEmailService emailService)
         {
             _repository = repository;
             _emailService = emailService;
@@ -48,14 +49,10 @@ namespace Tone.Domain.Commands.Handlers
         public ICommandResult Handle(UpdateUserCommand command)
         {
             var name = new Name(command.FirstName, command.LastName);
-            var email = new Email(command.Email);
-            var password = new Password(command.Password);
             var address = new Address(command.Street, command.Number, command.Neighborhood, command.City, command.State, command.Country, command.ZipCode);
-            var user = new User(command.Id, name, email, password, command.Status, command.Birthdate, address, command.Image);
+            var user = new User(command.Id, name, null, command.Birthdate, address, command.Image);
 
             AddNotifications(name.Notifications);
-            AddNotifications(email.Notifications);
-            AddNotifications(password.Notifications);
             AddNotifications(address.Notifications);
             AddNotifications(user.Notifications);
 

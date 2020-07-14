@@ -6,7 +6,7 @@ namespace Tone.Infra.Context
         {
             get
             {
-                return @"Server=;Database=;Integrated Security=false;User Id=;Password=;";
+                return @"Server=LUCAS-CDS;Database=FreeTone;Integrated Security=true;User Id=sa;Password=123;";
             }
         }
     }

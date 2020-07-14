@@ -17,7 +17,7 @@ namespace Tone.Infra.Repositories
             throw new NotImplementedException();
         }
 
-        public IList<Category> Get(string search)
+        public IList<Category> Get()
         {
             throw new NotImplementedException();
         }

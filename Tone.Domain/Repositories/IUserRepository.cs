@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Tone.Domain.Entities;
+using Tone.Domain.Queries.Users;
 
 namespace Tone.Domain.Repositories
 {
@@ -13,7 +12,7 @@ namespace Tone.Domain.Repositories
         
         bool ChangeStatus(Guid id, int status);
 
-        User Login(string email, string password);
+        UserAuthQuery Login(string email, string password);
 
         bool Delete(Guid id);
     }
