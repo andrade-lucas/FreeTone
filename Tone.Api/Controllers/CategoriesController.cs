@@ -21,35 +21,35 @@ namespace Tone.Api.Controllers
         }
 
         [HttpGet]
-        [Route("categories")]
-        public IList<Category> Get(string search)
+        [Route("v1/categories")]
+        public IList<Category> Get()
         {
-            return _repository.Get(search);
+            return _repository.Get();
         }
 
         [HttpGet]
-        [Route("categories/{id}")]
+        [Route("v1/categories/{id}")]
         public Category GetById(Guid id)
         {
             return _repository.GetById(id);
         }
 
         [HttpPost]
-        [Route("categories")]
+        [Route("v1/categories")]
         public ICommandResult Create([FromBody]CreateCategoryCommand command)
         {
             return _handler.Handle(command);
         }
 
         [HttpPut]
-        [Route("categories")]
+        [Route("v1/categories")]
         public ICommandResult Update([FromBody]UpdateCategoryCommand command)
         {
             return _handler.Handle(command);
         }
 
         [HttpDelete]
-        [Route("categories")]
+        [Route("v1/categories")]
         public ICommandResult Delete(DeleteCategoryCommand command)
         {
             return _handler.Handle(command);

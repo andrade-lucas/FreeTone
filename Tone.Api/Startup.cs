@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Tone.Domain.Repositories;
+using Tone.Domain.Services;
 using Tone.Infra.Context;
 using Tone.Infra.Repositories;
+using Tone.Infra.Services;
 
 namespace Tone.Api
 {
@@ -19,7 +21,18 @@ namespace Tone.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IDB, MsSqlDB>();
+            services.AddCors(options => options.AddPolicy("ApiCorsPolicy", build => 
+            {
+                build.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+
+            services.AddResponseCompression();
+            services.AddControllers();
+            
+            services.AddScoped<IDB, MsSqlDB>();
+            services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IAlbumRepository, AlbumRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IGenderRepository, GenderRepository>();
@@ -36,7 +49,13 @@ namespace Tone.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("ApiCorsPolicy");
             app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+            app.UseResponseCompression();
         }
     }
 }
