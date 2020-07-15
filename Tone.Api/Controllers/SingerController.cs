@@ -22,28 +22,35 @@ namespace Tone.Api.Controllers
         }
 
         [HttpGet]
-        [Route("singers")]
+        [Route("v1/singers")]
         public GetSingersQuery Get(string search)
         {
             return _repository.Get(search);
         }
 
         [HttpGet]
-        [Route("singers/{id}")]
+        [Route("v1/singers/{id}")]
         public Singer GetById(Guid id)
         {
             return _repository.GetById(id);
         }
 
         [HttpPost]
-        [Route("singers")]
+        [Route("v1/singers")]
         public ICommandResult Create([FromBody]CreateSingerCommand command)
         {
             return _handler.Handle(command);
         }
 
+        [HttpPut]
+        [Route("v1/singers/{id}")]
+        public ICommandResult Update([FromBody]UpdateSingerCommand command)
+        {
+            return _handler.Handle(command);
+        }
+
         [HttpDelete]
-        [Route("singers/{id}")]
+        [Route("v1/singers/{id}")]
         public ICommandResult Delete(DeleteSingerCommand command)
         {
             return _handler.Handle(command);

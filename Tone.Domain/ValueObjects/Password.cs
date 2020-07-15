@@ -7,14 +7,16 @@ namespace Tone.Domain.ValueObjects
 {
     public class Password : ValueObject
     {
+        private readonly string _key = "3C7B4C66-E645-4A2E-A697-F0BD70A295C3";
+        
         public string Value { get; private set; }
 
         public Password(string value)
         {
-            Value = this.Cryptograph(value);
-
-            if (Value.Length < 4)
+            if (value.Length < 4)
                 AddNotification("Password", string.Format(MessagesUtil.MinLength, "Senha", 4));
+                
+            Value = this.Cryptograph(value + _key);
         }
 
         private string Cryptograph(string value)
