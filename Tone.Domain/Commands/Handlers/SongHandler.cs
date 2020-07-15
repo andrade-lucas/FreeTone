@@ -18,17 +18,18 @@ namespace Tone.Domain.Commands.Handlers
 
         public SongHandler(ISongRepository repository, IAlbumRepository albumRepository, ISingerRepository singerRepository)
         {
-            _repository = repository;
-            _albumRepository = albumRepository;
-            _singerRepository = singerRepository;
+            this._repository = repository;
+            this._albumRepository = albumRepository;
+            this._singerRepository = singerRepository;
         }
 
         public ICommandResult Handle(CreateSongCommand command)
         {
             var singerQuery = _singerRepository.GetById(command.SingerId);
             var albumQuery = _albumRepository.GetById(command.AlbumId);
+            Name singerName = new Name(singerQuery.FirstName, singerQuery.LastName);
 
-            Singer singer = new Singer(new Name(singerQuery.FirstName, singerQuery.LastName), singerQuery.Nationality, singerQuery.About, singerQuery.Image);
+            Singer singer = new Singer(singerName, singerQuery.Nationality, singerQuery.About, singerQuery.Image);
             Album album = new Album(albumQuery.Id, albumQuery.Title, null, null, albumQuery.Image);
             Song song = new Song(command.Title, singer, album, command.Url, command.PublishedDate);
 
@@ -49,8 +50,9 @@ namespace Tone.Domain.Commands.Handlers
         {
             var singerQuery = _singerRepository.GetById(command.SingerId);
             var albumQuery = _albumRepository.GetById(command.AlbumId);
+            Name singerName = new Name(singerQuery.FirstName, singerQuery.LastName);
             
-            Singer singer = new Singer(new Name(singerQuery.FirstName, singerQuery.LastName), singerQuery.Nationality, singerQuery.About, singerQuery.Image);
+            Singer singer = new Singer(singerName, singerQuery.Nationality, singerQuery.About, singerQuery.Image);
             Album album = new Album(albumQuery.Id, albumQuery.Title, null, null, albumQuery.Image);
             Song song = new Song(command.Id, command.Title, singer, album, command.Url, command.PublishedDate);
 

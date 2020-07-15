@@ -7,7 +7,7 @@ namespace Tone.Domain.Repositories
 {
     public interface ISongRepository
     {
-        IList<GetSongsQuery> Get(string search = "");
+        IList<GetSongsQuery> Get();
         GetSongByIdQuery GetById(Guid id);
         bool Create(Song song);
         bool Update(Song song);
