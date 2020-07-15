@@ -25,8 +25,9 @@ namespace Tone.Domain.Commands.Handlers
         public ICommandResult Handle(CreateAlbumCommand command)
         {
             var categoryQuery = _categoryRepository.GetById(command.CategoryId);
+            var genderQuery = _genderRepository.GetById(command.GenderId);
             
-            Gender gender = _genderRepository.GetById(command.GenderId);
+            Gender gender = new Gender(genderQuery.Id, genderQuery.Title, genderQuery.Description);
             Category category = new Category(categoryQuery.Id, categoryQuery.Title, categoryQuery.Description);
             Album album = new Album(command.Title, gender, category, command.Image);
 
@@ -45,8 +46,9 @@ namespace Tone.Domain.Commands.Handlers
         public ICommandResult Handle(EditAlbumCommand command)
         {
             var categoryQuery = _categoryRepository.GetById(command.CategoryId);
+            var genderQuery = _genderRepository.GetById(command.GenderId);
 
-            Gender gender = _genderRepository.GetById(command.GenderId);
+            Gender gender = new Gender(genderQuery.Id, genderQuery.Title, genderQuery.Description);
             Category category = new Category(categoryQuery.Id, categoryQuery.Title, categoryQuery.Description);
             Album album = new Album(command.Id, command.Title, gender, category, command.Image);
 

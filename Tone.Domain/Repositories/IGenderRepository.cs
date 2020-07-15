@@ -8,9 +8,9 @@ namespace Tone.Domain.Repositories
     public interface IGenderRepository
     {
         IList<GetGendersQuery> Get();
-        Gender GetById(Guid id);
+        GetGenderByIdQuery GetById(Guid id);
         bool Create(Gender gender);
-        bool Edit(Gender gender);
+        bool Update(Gender gender);
         bool Delete(Guid id);
     }
 }
