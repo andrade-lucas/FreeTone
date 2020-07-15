@@ -4,6 +4,7 @@ using Tone.Domain.Commands.Outputs;
 using Tone.Domain.Entities;
 using Tone.Domain.Repositories;
 using Tone.Domain.Utils;
+using Tone.Domain.ValueObjects;
 using Tone.Shared.Commands;
 
 namespace Tone.Domain.Commands.Handlers
@@ -24,8 +25,11 @@ namespace Tone.Domain.Commands.Handlers
 
         public ICommandResult Handle(CreateSongCommand command)
         {
-            Singer singer = _singerRepository.GetById(command.SingerId);
-            Album album = _albumRepository.GetById(command.AlbumId);
+            var singerQuery = _singerRepository.GetById(command.SingerId);
+            var albumQuery = _albumRepository.GetById(command.AlbumId);
+
+            Singer singer = new Singer(new Name(singerQuery.FirstName, singerQuery.LastName), singerQuery.Nationality, singerQuery.About, singerQuery.Image);
+            Album album = new Album(albumQuery.Id, albumQuery.Title, null, null, albumQuery.Image);
             Song song = new Song(command.Title, singer, album, command.Url, command.PublishedDate);
 
             AddNotifications(song.Notifications);
@@ -43,8 +47,11 @@ namespace Tone.Domain.Commands.Handlers
 
         public ICommandResult Handle(UpdateSongCommand command)
         {
-            Singer singer = _singerRepository.GetById(command.SingerId);
-            Album album = _albumRepository.GetById(command.AlbumId);
+            var singerQuery = _singerRepository.GetById(command.SingerId);
+            var albumQuery = _albumRepository.GetById(command.AlbumId);
+            
+            Singer singer = new Singer(new Name(singerQuery.FirstName, singerQuery.LastName), singerQuery.Nationality, singerQuery.About, singerQuery.Image);
+            Album album = new Album(albumQuery.Id, albumQuery.Title, null, null, albumQuery.Image);
             Song song = new Song(command.Id, command.Title, singer, album, command.Url, command.PublishedDate);
 
             AddNotifications(song.Notifications);

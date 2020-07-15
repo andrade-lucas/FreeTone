@@ -41,7 +41,7 @@ namespace Tone.Domain.Commands.Handlers
         public ICommandResult Handle(UpdateSingerCommand command)
         {
             var name = new Name(command.FirstName, command.LastName);
-            var singer = new Singer(name, command.Nationality, command.About, command.Image);
+            var singer = new Singer(command.Id, name, command.Nationality, command.About, command.Image);
 
             AddNotifications(name.Notifications);
             AddNotifications(singer.Notifications);

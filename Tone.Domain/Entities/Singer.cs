@@ -33,6 +33,17 @@ namespace Tone.Domain.Entities
             UpdatedAt = DateTime.Now;
         }
 
+        public Singer(Guid id, Name name, string nationality, string about, string image) : base(id)
+        {
+            Name = name;
+            Nationality = nationality;
+            About = about;
+            Image = image;
+            _songs = new List<Song>();
+            _albums = new List<Album>();
+            UpdatedAt = DateTime.Now;
+        }
+
         public void AddSong(Song song)
         {
             if (song.IsValid)
