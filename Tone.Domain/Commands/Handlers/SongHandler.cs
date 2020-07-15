@@ -29,7 +29,7 @@ namespace Tone.Domain.Commands.Handlers
             var albumQuery = _albumRepository.GetById(command.AlbumId);
             Name singerName = new Name(singerQuery.FirstName, singerQuery.LastName);
 
-            Singer singer = new Singer(singerName, singerQuery.Nationality, singerQuery.About, singerQuery.Image);
+            Singer singer = new Singer(singerQuery.Id, singerName, singerQuery.Nationality, singerQuery.About, singerQuery.Image);
             Album album = new Album(albumQuery.Id, albumQuery.Title, null, null, albumQuery.Image);
             Song song = new Song(command.Title, singer, album, command.Url, command.PublishedDate);
 
@@ -52,7 +52,7 @@ namespace Tone.Domain.Commands.Handlers
             var albumQuery = _albumRepository.GetById(command.AlbumId);
             Name singerName = new Name(singerQuery.FirstName, singerQuery.LastName);
             
-            Singer singer = new Singer(singerName, singerQuery.Nationality, singerQuery.About, singerQuery.Image);
+            Singer singer = new Singer(singerQuery.Id, singerName, singerQuery.Nationality, singerQuery.About, singerQuery.Image);
             Album album = new Album(albumQuery.Id, albumQuery.Title, null, null, albumQuery.Image);
             Song song = new Song(command.Id, command.Title, singer, album, command.Url, command.PublishedDate);
 
@@ -61,7 +61,7 @@ namespace Tone.Domain.Commands.Handlers
             if (Invalid)
                 return new CommandResult(false, MessagesUtil.FormFail, Notifications);
 
-            bool result = _repository.Create(song);
+            bool result = _repository.Update(song);
 
             if (!result)
                 return new CommandResult(false, MessagesUtil.UpdateError, Notifications);
