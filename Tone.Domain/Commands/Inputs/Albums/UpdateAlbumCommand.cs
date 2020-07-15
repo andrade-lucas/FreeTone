@@ -3,7 +3,7 @@ using Tone.Shared.Commands;
 
 namespace Tone.Domain.Commands.Inputs.Albums
 {
-    public class EditAlbumCommand : ICommand
+    public class UpdateAlbumCommand : ICommand
     {
         public Guid Id { get; set; }
         public string Title { get; set; }

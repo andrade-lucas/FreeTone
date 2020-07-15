@@ -9,7 +9,7 @@ using Tone.Shared.Commands;
 namespace Tone.Domain.Commands.Handlers
 {
     public class AlbumHandler : Notifiable, ICommandHandler<CreateAlbumCommand>,
-    ICommandHandler<EditAlbumCommand>, ICommandHandler<DeleteAlbumCommand>
+    ICommandHandler<UpdateAlbumCommand>, ICommandHandler<DeleteAlbumCommand>
     {
         private readonly IAlbumRepository _repository;
         private readonly IGenderRepository _genderRepository;
@@ -43,7 +43,7 @@ namespace Tone.Domain.Commands.Handlers
             return new CommandResult(true, MessagesUtil.CreatedSuccess);
         }
 
-        public ICommandResult Handle(EditAlbumCommand command)
+        public ICommandResult Handle(UpdateAlbumCommand command)
         {
             var categoryQuery = _categoryRepository.GetById(command.CategoryId);
             var genderQuery = _genderRepository.GetById(command.GenderId);
@@ -66,7 +66,6 @@ namespace Tone.Domain.Commands.Handlers
 
         public ICommandResult Handle(DeleteAlbumCommand command)
         {
-
             if (command.Id.ToString().Length == 0)
                 AddNotification("Id", "Identificador inválido!");
 
@@ -77,7 +76,7 @@ namespace Tone.Domain.Commands.Handlers
             if (!result)
                 return new CommandResult(false, MessagesUtil.DeleteError, Notifications);
 
-            return new CommandResult(false, MessagesUtil.DeletedSuccess);
+            return new CommandResult(true, MessagesUtil.DeletedSuccess);
         }
     }
 }
