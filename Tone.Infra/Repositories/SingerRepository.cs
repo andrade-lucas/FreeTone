@@ -61,7 +61,7 @@ namespace Tone.Infra.Repositories
 
         public GetSingerByIdQuery GetById(Guid id)
         {
-            return _db.Connection().QuerySingle<GetSingerByIdQuery>(
+            return _db.Connection().QuerySingleOrDefault<GetSingerByIdQuery>(
                 "select Id, FirstName, LastName, Nationality, About, Image from [Singer] where Id = @id",
                 new
                 {

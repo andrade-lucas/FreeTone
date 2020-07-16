@@ -58,7 +58,7 @@ namespace Tone.Infra.Repositories
         public GetCategoryByIdQuery GetById(Guid id)
         {
             return _db.Connection().QueryFirstOrDefault<GetCategoryByIdQuery>(
-                "select * from [Category] where Id = @id",
+                "select Id, Title, Description from [Category] where Id = @id",
                 new
                 {
                     id = id

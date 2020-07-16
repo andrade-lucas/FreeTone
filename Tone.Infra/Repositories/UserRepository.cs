@@ -1,9 +1,9 @@
 using System;
 using Tone.Domain.Entities;
 using Tone.Domain.Repositories;
+using Tone.Domain.Queries.Users;
 using Tone.Infra.Context;
 using Dapper;
-using Tone.Domain.Queries.Users;
 
 namespace Tone.Infra.Repositories
 {
@@ -104,7 +104,7 @@ namespace Tone.Infra.Repositories
 
         public UserAuthQuery Login(string email, string password)
         {
-            return _db.Connection().QuerySingle<UserAuthQuery>(
+            return _db.Connection().QuerySingleOrDefault<UserAuthQuery>(
                 "select Id, FirstName, LastName, Email, Image from [User] where Email = @email and Password = @password",
                 new
                 {

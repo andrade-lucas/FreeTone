@@ -1,6 +1,6 @@
 using Tone.Shared.Commands;
 
-namespace Tone.Domain.Commands.Inputs.User
+namespace Tone.Domain.Commands.Inputs.Account
 {
     public class LoginCommand : ICommand
     {

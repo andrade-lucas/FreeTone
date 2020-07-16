@@ -67,7 +67,7 @@ namespace Tone.Infra.Repositories
 
         public GetGenderByIdQuery GetById(Guid id)
         {
-            return _db.Connection().QuerySingle<GetGenderByIdQuery>(
+            return _db.Connection().QuerySingleOrDefault<GetGenderByIdQuery>(
                 "select Id, Title, Description from [Gender] where Id = @id",
                 new
                 {

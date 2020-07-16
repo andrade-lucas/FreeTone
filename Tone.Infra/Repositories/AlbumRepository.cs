@@ -60,7 +60,7 @@ namespace Tone.Infra.Repositories
 
         public GetAlbumByIdQuery GetById(Guid id)
         {
-            return _db.Connection().QuerySingle<GetAlbumByIdQuery>(
+            return _db.Connection().QuerySingleOrDefault<GetAlbumByIdQuery>(
                 "select Id, Title, GenderId, CategoryId, Image from [Album] where Id = @id",
                 new
                 {

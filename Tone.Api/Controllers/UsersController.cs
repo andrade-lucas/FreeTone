@@ -21,6 +21,13 @@ namespace Tone.Api.Controllers
             _handler = new UserHandler(_repository, _emailService);
         }
 
+        [HttpPost]
+        [Route("v1/users")]
+        public ICommandResult Create([FromBody]CreateUserCommand command)
+        {
+            return _handler.Handle(command);
+        }
+
         [HttpPut]
         [Route("v1/users/profile")]
         public ICommandResult Update([FromBody]UpdateUserCommand command)

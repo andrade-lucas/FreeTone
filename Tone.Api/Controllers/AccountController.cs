@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tone.Api.Services;
 using Tone.Domain.Commands.Handlers;
-using Tone.Domain.Commands.Inputs.User;
+using Tone.Domain.Commands.Inputs.Account;
 using Tone.Domain.Commands.Outputs;
 using Tone.Domain.Queries.Users;
 using Tone.Domain.Repositories;
@@ -41,7 +41,7 @@ namespace Tone.Api.Controllers
 
         [HttpPost]
         [Route("v1/account/register")]
-        public ICommandResult Register([FromBody]CreateUserCommand command)
+        public ICommandResult Register([FromBody]CreateAccountCommand command)
         {
             return _handler.Handle(command);
         }
