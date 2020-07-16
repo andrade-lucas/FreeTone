@@ -2,6 +2,11 @@
 {
     public static class MessagesUtil
     {
+        // Account messages.
+        public static string Welcome = "Seja bem-vindo!";
+        public static string EmailWelcome = "Seja bem-vindo ao FreeTone, seu cadastro foi realizado com sucesso!";
+        public static string UserNotFound = "O usuário informado não foi encontrado! Verifique se o e-mail e a senha estão corretos!";
+        
         // Validation messages.
         public static string MinLength = "O campo {0} deve ter pelo menos {1} caracteres";
         public static string MaxLength = "O campo {0} deve ter no máximo {1} caracteres";

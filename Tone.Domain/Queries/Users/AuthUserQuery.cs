@@ -2,7 +2,7 @@ using System;
 
 namespace Tone.Domain.Queries.Users
 {
-    public class UserAuthQuery
+    public class AuthUserQuery
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }

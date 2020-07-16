@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tone.Domain.Commands.Handlers;
 using Tone.Domain.Commands.Inputs.singers;
@@ -10,6 +11,7 @@ using Tone.Shared.Commands;
 
 namespace Tone.Api.Controllers
 {
+    [Authorize]
     public class SingerController : Controller
     {
         private readonly ISingerRepository _repository;

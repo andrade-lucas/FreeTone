@@ -4,6 +4,7 @@ namespace Tone.Shared.Commands
     {
         bool Status { get; set; }
         string Message { get; set; }
+        object Errors { get; set; }
         object Data { get; set; }
     }
 }
