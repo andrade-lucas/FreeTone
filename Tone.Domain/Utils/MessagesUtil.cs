@@ -14,6 +14,7 @@
         public static string DocumentNumberInvalid = "Número de documento inválido";
         public static string RequiredField = "O campo {0} é obrigatório";
         public static string FormFail = "Por favor, verifique se todos os campos estão preenchidos corretamente!";
+        public static string EmailExists = "O E-mail informado já está existe no nosso sistema!";
 
         // Confirmation messages.
         public static string CreatedSuccess = "Cadastro realizado com sucesso!";

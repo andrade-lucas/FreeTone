@@ -35,6 +35,13 @@ namespace Tone.Domain.Commands.Handlers
             AddNotifications(password.Notifications);
             AddNotifications(user.Notifications);
 
+            if (Invalid)
+                return new CommandResult(false, MessagesUtil.FormFail, Notifications);
+            
+            bool emailExists = _repository.EmailExists(email.Address);
+            if (emailExists)
+                return new CommandResult(false, MessagesUtil.EmailExists);
+
             bool save = _repository.Create(user);
             if (save)
                 _emailService.Send(user.Email.Address, MessagesUtil.Welcome, MessagesUtil.EmailWelcome);
@@ -56,14 +63,14 @@ namespace Tone.Domain.Commands.Handlers
             AddNotifications(user.Notifications);
 
             if (Invalid)
-                return new CommandResult(false, "Falha ao atualizar usuário", Notifications);
+                return new CommandResult(false, MessagesUtil.UpdateError, Notifications);
             
             var result = _repository.Update(user);
 
             if (!result)
-                return new CommandResult(false, "Falha ao atualizar usuário");
+                return new CommandResult(false, MessagesUtil.UpdateError);
 
-            return new CommandResult(true, "Usuário atualizado com sucesso");
+            return new CommandResult(true, MessagesUtil.CreatedSuccess);
         }
 
         public ICommandResult Handle(DeleteUserCommand command)
@@ -71,9 +78,9 @@ namespace Tone.Domain.Commands.Handlers
             bool result = _repository.Delete(command.Id);
 
             if (!result)
-                return new CommandResult(false, "Erro ao deletar usuário! \nPor favor, tente mais tarde.");
+                return new CommandResult(false, MessagesUtil.DeleteError);
 
-            return new CommandResult(true, "Usuário deletado com sucesso!");
+            return new CommandResult(true, MessagesUtil.DeletedSuccess);
         }
     }
 }

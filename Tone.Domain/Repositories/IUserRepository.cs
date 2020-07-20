@@ -15,5 +15,7 @@ namespace Tone.Domain.Repositories
         UserAuthQuery Login(string email, string password);
 
         bool Delete(Guid id);
+
+        bool EmailExists(string email);
     }
 }

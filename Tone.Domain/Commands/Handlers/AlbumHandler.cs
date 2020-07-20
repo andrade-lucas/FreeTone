@@ -20,9 +20,10 @@ namespace Tone.Domain.Commands.Handlers
 
         public AlbumHandler(IAlbumRepository repository, IGenderRepository genderRepository, ICategoryRepository categoryRepository, ISongRepository songRepository = null)
         {
-            _repository = repository;
-            _genderRepository = genderRepository;
-            _categoryRepository = categoryRepository;
+            this._repository = repository;
+            this._genderRepository = genderRepository;
+            this._categoryRepository = categoryRepository;
+            this._songRepository = songRepository;
         }
 
         public ICommandResult Handle(GetAlbumById command)
@@ -93,7 +94,7 @@ namespace Tone.Domain.Commands.Handlers
         public ICommandResult Handle(DeleteAlbumCommand command)
         {
             if (command.Id.ToString().Length == 0)
-                AddNotification("Id", "Identificador inválido!");
+                AddNotification("Id", string.Format(MessagesUtil.InvalidField, "Identificador"));
 
             if (Invalid)
                 return new CommandResult(false, string.Format(MessagesUtil.InvalidField, "Identificador"), Notifications);

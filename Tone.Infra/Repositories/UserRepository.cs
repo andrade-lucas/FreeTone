@@ -113,5 +113,18 @@ namespace Tone.Infra.Repositories
                 }
             );
         }
+
+        public bool EmailExists(string email)
+        {
+            string exists = _db.Connection().QuerySingleOrDefault(
+                "select Email from [User] where Email = @email",
+                new
+                {
+                    email = email
+                }
+            );
+
+            return exists != null;
+        }
     }
 }
