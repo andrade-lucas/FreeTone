@@ -14,13 +14,15 @@ namespace Tone.Api.Controllers
         private readonly IAlbumRepository _albumRepository;
         private readonly IGenderRepository _genderRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ISongRepository _songRepository;
         private readonly AlbumHandler _handler;
 
-        public AlbumsController(IAlbumRepository albumRepository, IGenderRepository genderRepository, ICategoryRepository categoryRepository)
+        public AlbumsController(IAlbumRepository albumRepository, IGenderRepository genderRepository, ICategoryRepository categoryRepository, ISongRepository songRepository)
         {
             this._albumRepository = albumRepository;
             this._genderRepository = genderRepository;
             this._categoryRepository = categoryRepository;
+            this._songRepository = songRepository;
             this._handler = new AlbumHandler(_albumRepository, _genderRepository, _categoryRepository);
         }
         
@@ -33,9 +35,9 @@ namespace Tone.Api.Controllers
 
         [HttpGet]
         [Route("v1/albums/{id}")]
-        public GetAlbumByIdQuery GetById(Guid id)
+        public ICommandResult GetById(GetAlbumById command)
         {
-            return _albumRepository.GetById(id);
+            return _handler.Handle(command);
         }
 
         [HttpPost]

@@ -62,6 +62,19 @@ namespace Tone.Infra.Repositories
             ).ToList();
         }
 
+        public IList<GetSongsByAlbumQuery> GetByAlbum(Guid albumId)
+        {
+            return _db.Connection().Query<GetSongsByAlbumQuery>(
+                "select Song.Id, Song.Title, Song.Url, SingerId, Singer.FirstName SingerFirstName, Singer.LastName SingerLastName, Singer.Image SingerImage from [Song] " +
+                "inner join Singer on Singer.Id = Song.SingerId " +
+                "where AlbumId = @albumId",
+                new
+                {
+                    albumId = albumId
+                }
+            ).ToList();
+        }
+
         public GetSongByIdQuery GetById(Guid id)
         {
             return _db.Connection().QuerySingleOrDefault<GetSongByIdQuery>(

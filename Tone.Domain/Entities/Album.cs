@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Tone.Domain.Utils;
 using Tone.Shared.Entities;
 
 namespace Tone.Domain.Entities
@@ -45,8 +46,10 @@ namespace Tone.Domain.Entities
 
         public void AddSong(Song song)
         {
-            if (song.IsValid)
+            if (song.IsValid && this._songs != null)
                 this._songs.Add(song);
+            else
+                AddNotification("Músicas", MessagesUtil.Error);
         }
 
         public override string ToString()
